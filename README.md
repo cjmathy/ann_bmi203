@@ -9,7 +9,6 @@ Implementation of an artificial neural network for predicting TF binding sites.
 [![Build
 Status](https://travis-ci.org/cjmathy/ann_bmi203.svg?branch=master)](https://travis-ci.org/cjmathy/ann_bmi203)
 
-
 ## usage
 
 To use the package, first run
