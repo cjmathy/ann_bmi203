@@ -1,4 +1,4 @@
-import constants as c
+from ann import constants as c
 import numpy as np
 import scipy.special
 
