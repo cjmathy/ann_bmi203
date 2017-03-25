@@ -1,5 +1,4 @@
 import numpy as np
-import ann.rap1 as rap1
 import ann.constants as c
 from ann.neuralnet import NeuralNet
 import sklearn.model_selection
@@ -31,18 +30,17 @@ def test_autoencoder():
 
 def test_neuralnetwork():
 
-    c.N_FEATURES = 34
-    c.N_HIDDEN = 5
+    c.N_FEATURES = 5
+    c.N_HIDDEN = 2
     c.N_OUTPUT = 1
     c.EPSILON = 0.0001
     c.ALPHA = 30
     c.LAMBDA = 0.001
-    c.MAX_ITERATIONS = 1000
+    c.MAX_ITERATIONS = 100
     layer_sizes = [c.N_FEATURES, c.N_HIDDEN, c.N_OUTPUT]
 
-    pos, neg_sim, neg_rand = rap1.prepare_data()
-    X, y = rap1.build_training_set(pos, neg_sim, neg_rand)
-    X, y = sklearn.utils.shuffle(X, y)
+    X = np.array([1, 1, 1, 1, 1], [0, 0, 0, 0, 0])
+    y = np.array([1, 0])
     nn = NeuralNet(layer_sizes)
     nn.train(X, y, method="batch")
     predictions = nn.test(X, method="sample")

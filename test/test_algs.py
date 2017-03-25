@@ -1,5 +1,4 @@
 import numpy as np
-import ann.rap1 as rap1
 import ann.constants as c
 from ann.neuralnet import NeuralNet
 import sklearn.model_selection
