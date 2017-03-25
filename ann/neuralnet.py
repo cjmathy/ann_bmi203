@@ -21,7 +21,8 @@ class NeuralNet(object):
         self.activations = []
 
         # initialize the weights to small random values, initialize the biases to 0
-        for i in xrange(self.N_LAYERS-1):
+        # for i in xrange(self.N_LAYERS-1):
+        for i in range(self.N_LAYERS-1):
             w = np.random.normal(scale=0.01,
                                  size=(self.N_NODES[i+1], self.N_NODES[i]))
             self.weights.append(w)
@@ -33,7 +34,8 @@ class NeuralNet(object):
 
         if method is "autoencoder":
             error = []
-            for iteration in xrange(c.MAX_ITERATIONS):
+            for iteration in range(c.MAX_ITERATIONS):
+            # for iteration in xrange(c.MAX_ITERATIONS):
                 predictions = self.test(samples, method="design")
                 e = np.linalg.norm(predictions-samples)
                 error.append(e)
@@ -50,7 +52,8 @@ class NeuralNet(object):
             return error, c.MAX_ITERATIONS
 
         if method is "batch":
-            for iteration in xrange(c.MAX_ITERATIONS):
+            for iteration in range(c.MAX_ITERATIONS):
+            # for iteration in xrange(c.MAX_ITERATIONS):
                 deltas = self.reset_deltas()
                 for i, sample in enumerate(samples):
                     sample = sample.reshape((c.N_FEATURES, 1))
@@ -60,7 +63,8 @@ class NeuralNet(object):
                 self.update_parameters(deltas, samples)
 
         if method is "stochastic":
-            for iteration in xrange(c.MAX_ITERATIONS):
+            for iteration in range(c.MAX_ITERATIONS):
+            # for iteration in xrange(c.MAX_ITERATIONS):
                 deltas = self.reset_deltas()
                 i = np.random.randint(0, samples.shape[0])
                 self.feedforward(samples[i])
@@ -74,7 +78,8 @@ class NeuralNet(object):
         self.activations = [a]
 
         # compute activations of each layer
-        for l in xrange(self.N_LAYERS-1):
+        # for l in xrange(self.N_LAYERS-1):
+        for l in range(self.N_LAYERS-1):
             w = self.weights[l]
             b = self.biases[l]
             z = np.dot(w, a) + b
@@ -94,7 +99,8 @@ class NeuralNet(object):
         delta = - np.multiply(error, fprime)
         deltas = [delta]
 
-        for l in xrange(self.N_LAYERS-2, 0, -1):
+        for l in range(self.N_LAYERS-2, 0, -1):
+        # for l in xrange(self.N_LAYERS-2, 0, -1):
             a = self.activations[l]
             wd = np.dot(self.weights[l].T, delta)
             fprime = np.multiply(a, 1-a)
@@ -103,7 +109,8 @@ class NeuralNet(object):
 
         gradW, gradB = [], []
 
-        for l in xrange(self.N_LAYERS-1):
+        for l in range(self.N_LAYERS-1):
+        # for l in xrange(self.N_LAYERS-1):
             d = deltas[l]
             a = self.activations[l]
             partial = np.dot(d, a.T)
@@ -125,7 +132,8 @@ class NeuralNet(object):
         """updates the deltas according to the gradients computed through backpropagation"""
         deltaW, deltaB = deltas
         gradW, gradB = gradients
-        for l in xrange(self.N_LAYERS-1):
+        for l in range(self.N_LAYERS-1):
+        # for l in xrange(self.N_LAYERS-1):
             deltaW[l] = deltaW[l] + gradW[l]
             deltaB[l] = deltaB[l] + gradB[l]
 
@@ -134,7 +142,8 @@ class NeuralNet(object):
         deltaW, deltaB = deltas
         alpha = c.ALPHA
         lam = c.LAMBDA
-        for l in xrange(self.N_LAYERS-1):
+        for l in range(self.N_LAYERS-1):
+        # for l in xrange(self.N_LAYERS-1):
             w, b = self.weights[l], self.biases[l]
             dW, dB = deltaW[l], deltaB[l]
 

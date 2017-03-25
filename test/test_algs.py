@@ -39,7 +39,7 @@ def test_neuralnetwork():
     c.MAX_ITERATIONS = 100
     layer_sizes = [c.N_FEATURES, c.N_HIDDEN, c.N_OUTPUT]
 
-    X = np.array([1, 1, 1, 1, 1], [0, 0, 0, 0, 0])
+    X = np.array([[1, 1, 1, 1, 1], [0, 0, 0, 0, 0]])
     y = np.array([1, 0])
     nn = NeuralNet(layer_sizes)
     nn.train(X, y, method="batch")
